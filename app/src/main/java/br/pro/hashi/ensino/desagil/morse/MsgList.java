@@ -22,6 +22,7 @@ public class MsgList {
     }
 
     public List<String> getMessages(){
+
         return messages;
     }
 }
