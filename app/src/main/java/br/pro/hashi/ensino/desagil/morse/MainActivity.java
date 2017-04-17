@@ -1,23 +1,22 @@
 package br.pro.hashi.ensino.desagil.morse;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.LinkedList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_EXAMPLE = 0;
 
-    private LinkedList<String> mensagens;
+    private List<String> mensagens;
     private ArrayAdapter<String> listAdapter;
     private ListView listView;
     private MsgList listaDeMsgs;
@@ -29,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         listaDeMsgs = new MsgList();
         mensagens = listaDeMsgs.getMessages();
         listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mensagens);
+        listView = (ListView) findViewById(R.id.msgsListView);
         listView.setAdapter(listAdapter);
     }
 

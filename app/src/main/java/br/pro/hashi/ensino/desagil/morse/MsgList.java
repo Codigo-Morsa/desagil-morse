@@ -20,7 +20,7 @@ public class MsgList {
 
     }
 
-    public getMessages(){
+    public LinkedList<String> getMessages(){
         return messages;
     }
 }
