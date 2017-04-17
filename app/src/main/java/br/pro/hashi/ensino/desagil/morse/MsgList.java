@@ -1,6 +1,7 @@
 package br.pro.hashi.ensino.desagil.morse;
 
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by elisa on 17/04/2017.
@@ -20,7 +21,7 @@ public class MsgList {
 
     }
 
-    public getMessages(){
+    public List<String> getMessages(){
         return messages;
     }
 }
