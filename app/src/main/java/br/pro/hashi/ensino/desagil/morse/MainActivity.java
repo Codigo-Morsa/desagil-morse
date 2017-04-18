@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private Spinner dropdown;
     private MsgList listaDeMsgs;
     private String msgtosend;
+    private int postosend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         listaDeMsgs = new MsgList();
         mensagens = listaDeMsgs.getMessages();
         msgtosend = null;
+        postosend = 0;
         listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mensagens);
 
         dropdown = (Spinner)findViewById(R.id.spinner);
@@ -94,10 +96,31 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // An item was selected. You can retrieve the selected item using
         // parent.getItemAtPosition(pos)
         msgtosend = parent.getItemAtPosition(pos).toString();
+        postosend = pos;
+        //Toast toast = Toast.makeText(this, msgtosend, Toast.LENGTH_SHORT);
+        //toast.show();
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
         // Another interface callback
+    }
+
+    public void nextItem(View view){
+
+        if(postosend < 5) {
+            postosend += 1;
+            dropdown.setSelection(postosend);
+        }
+
+    }
+
+    public void prevItem(View view){
+
+        if(postosend > 0) {
+            postosend -= 1;
+            dropdown.setSelection(postosend);
+        }
+
     }
 
 }
