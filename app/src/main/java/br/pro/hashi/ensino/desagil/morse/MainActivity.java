@@ -8,7 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private List<String> mensagens;
     private ArrayAdapter<String> listAdapter;
-    private ListView listView;
+    private Spinner dropdown;
     private MsgList listaDeMsgs;
 
     @Override
@@ -27,9 +27,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         listaDeMsgs = new MsgList();
         mensagens = listaDeMsgs.getMessages();
+
         listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mensagens);
-        listView = (ListView) findViewById(R.id.msgsListView);
-        listView.setAdapter(listAdapter);
+
+        dropdown = (Spinner)findViewById(R.id.spinner);
+
+        dropdown.setAdapter(listAdapter);
+
     }
 
 
