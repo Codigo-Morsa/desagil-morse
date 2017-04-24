@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_EXAMPLE = 0;
 
+    private ImageButton delete;
     private EditText txt;
     private FloatingActionButton morseButton;
     private List<String> mensagens;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listaDeMsgs = new MsgList();
+        delete = (ImageButton) findViewById(R.id.deleteButton);
         mensagens = listaDeMsgs.getMessages();
         listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mensagens);
         listView = (ListView) findViewById(R.id.msgsListView);
@@ -53,7 +56,14 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+        delete.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View V){
+                txt.setText("");
+            }
+        });
     }
+
 
 
     public void checkPermissions(View view){
