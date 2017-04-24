@@ -41,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
         morseButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View V){
-                txt.setText(".");
+
+                txt.append(".");
             }
         });
 
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         morseButton.setOnLongClickListener(new View.OnLongClickListener(){
             @Override
             public boolean onLongClick(View V){
-                txt.setText("_");
+                txt.append("-");
                 return true;
             }
         });
