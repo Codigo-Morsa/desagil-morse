@@ -1,16 +1,16 @@
 package br.pro.hashi.ensino.desagil.morse;
 
 public class MorseTree {
-    private String alphabet;
     private Node current;
     private Node left;
     private Node right;
     private Node[] nodes;
-
+    private String alphabet;
 
     public MorseTree() {
-        alphabet = "etianmsurwdkgohvf_l_pjbxcyzq__54_3___2__+____16=/_____7___8_90";
         int i;
+        alphabet = "_etianmsurwdkgohvf_l_pjbxcyzq__54_3___2__+____16=/_____7___8_90_";
+
         nodes = new Node[63];
         for(i = nodes.length - 1; i >= nodes.length / 2; i--) {
             nodes[i] = new Node(i,alphabet.charAt(i), null, null);
@@ -88,4 +88,6 @@ public class MorseTree {
         System.out.println(translation);
         return translation;
     }
+
 }
+
