@@ -4,8 +4,10 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -80,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
         RomanToMorse elisa = new RomanToMorse();
-        Log.d("FREDAO", elisa.getResult().entrySet().toString());
 
         task = new TimerTask() {
             public void run() {
@@ -98,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             Log.d("String appended",traducao);
                             if (!Objects.equals(traducao, "_")){
                                 txt.append(traducao);
+
                             }
                             morsetxt.setText("");
                         }
@@ -124,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         morseButton.setOnLongClickListener(new View.OnLongClickListener(){
             @Override
             public boolean onLongClick(View V){
-                if (tempstringmorse.length() < 5){
+                if (tempstringmorse.length() < 5) {
                     tempstringmorse += "-";
                     morsetxt.setText(tempstringmorse);
                     secondsPassed = 1;
@@ -149,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.DONUT)
     public void sendMessage(View view) {
         SmsManager manager = SmsManager.getDefault();
 
@@ -162,16 +165,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             toast.show();
         }
         catch(IllegalArgumentException exception){
-            Log.e("SendActivity", "number or message empty");
+            Log.e("SendActivity", "numbe+r or message empty");
         }
 //        listView = (ListView) findViewById(R.id.msgsListView);
 //        listView.setAdapter(listAdapter);
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.DONUT)
     public void checkPermissions(View view){
         int permission = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.SEND_SMS);
         if(permission == PackageManager.PERMISSION_GRANTED) {
+
+            if(txt.length() != 0){
+                msgtosend = txt.getText().toString();
+            }
+
             Toast toast = Toast.makeText(this, "Enviando SMS!", Toast.LENGTH_SHORT);
             toast.show();
             sendMessage(view);
@@ -202,8 +211,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                int pos, long id) {
         // An item was selected. You can retrieve the selected item using
         // parent.getItemAtPosition(pos)
+
         msgtosend = parent.getItemAtPosition(pos).toString();
         postosend = pos;
+
         //Toast toast = Toast.makeText(this, msgtosend, Toast.LENGTH_SHORT);
         //toast.show();
     }
