@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mensagens);
         dropdown = (Spinner)findViewById(R.id.spinner);
         dropdown.setOnItemSelectedListener(this);
-
         dropdown.setAdapter(listAdapter);
 
     }
@@ -71,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         morseButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View V){
-
                 txt.append(".");
             }
         });
@@ -80,7 +78,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         morseButton.setOnLongClickListener(new View.OnLongClickListener(){
             @Override
             public boolean onLongClick(View V){
-
                 txt.append("-");
                 return true;
             }
@@ -133,7 +130,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void nextItem(View view){
-
         if(postosend < 5) {
             postosend += 1;
             dropdown.setSelection(postosend);
@@ -142,7 +138,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void prevItem(View view){
-
         if(postosend > 0) {
             postosend -= 1;
             dropdown.setSelection(postosend);
