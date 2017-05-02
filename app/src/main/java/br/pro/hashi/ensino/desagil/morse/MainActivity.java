@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
         RomanToMorse elisa = new RomanToMorse();
-        Log.d("FREDAO", elisa.getResult().entrySet().toString());
 
         task = new TimerTask() {
             public void run() {
