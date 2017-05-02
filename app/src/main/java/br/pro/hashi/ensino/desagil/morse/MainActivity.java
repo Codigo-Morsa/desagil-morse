@@ -127,7 +127,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
 //        listView = (ListView) findViewById(R.id.msgsListView);
 //        listView.setAdapter(listAdapter);
-
     }
 
 
@@ -175,7 +174,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void nextItem(View view){
-
         if(postosend < 6) {
             postosend += 1;
             dropdown.setSelection(postosend);
@@ -184,7 +182,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void prevItem(View view){
-
         if(postosend > 0) {
             postosend -= 1;
             dropdown.setSelection(postosend);
