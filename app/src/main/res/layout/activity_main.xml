@@ -2,25 +2,26 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:isScrollContainer="false"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     tools:context="br.pro.hashi.ensino.desagil.morse.MainActivity">
 
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="371dp"
+        android:layout_height="22dp"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.157"
+        app:layout_constraintVertical_bias="0.016"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp" />
 
@@ -60,18 +61,19 @@
 
     <EditText
         android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="240dp"
+        android:layout_height="43dp"
         android:ems="10"
         android:inputType="textMultiLine"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="8dp"
-        app:layout_constraintVertical_bias="0.464" />
+        app:layout_constraintVertical_bias="0.407"
+        tools:layout_editor_absoluteY="192dp" />
 
     <Button
         android:layout_width="94dp"
@@ -87,10 +89,10 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.936"
-        app:layout_constraintLeft_toLeftOf="@+id/myButton"
+        app:layout_constraintHorizontal_bias="0.703"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
+        android:layout_marginEnd="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/myButton" />
 
     <Button
         android:id="@+id/button14"
@@ -104,7 +106,7 @@
         android:rotation="270"
         android:onClick="prevItem"
         app:layout_constraintBottom_toBottomOf="@+id/myButton"
-        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintHorizontal_bias="0.296"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@+id/myButton"
         app:layout_constraintVertical_bias="0.0"
@@ -114,8 +116,8 @@
 
     <ImageButton
         android:id="@+id/deleteButton"
-        android:layout_width="60dp"
-        android:layout_height="46dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded"
@@ -124,25 +126,62 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.951"
-        app:srcCompat="@android:drawable/ic_input_delete" />
+        app:layout_constraintVertical_bias="0.661"
+        app:srcCompat="@android:drawable/ic_input_delete"
+        app:layout_constraintHorizontal_bias="0.654" />
 
     <ImageButton
         android:id="@+id/sendButton"
-        android:layout_width="51dp"
-        android:layout_height="35dp"
-        android:layout_marginBottom="7dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
-        android:background="@android:color/background_dark"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:background="@drawable/rounded"
         android:cropToPadding="false"
         android:onClick="checkPermissions"
-        app:layout_constraintBottom_toTopOf="@+id/myButton"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@android:drawable/ic_menu_send" />
+        app:layout_constraintVertical_bias="0.608"
+        app:srcCompat="@android:drawable/ic_menu_send"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageButton
+        android:id="@+id/spaceButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:src="@drawable/space"
+        android:cropToPadding="false"
+        android:onClick="addSpaceBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.34"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.661" />
+
+    <TextView
+        android:id="@+id/morseView"
+        android:layout_width="219dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="99dp"
+        android:textAlignment="center"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </android.support.constraint.ConstraintLayout>

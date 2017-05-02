@@ -1,10 +1,13 @@
 package br.pro.hashi.ensino.desagil.morse;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class MorseToRoman {
+    private HashMap<String,Character> morsetoromanMap;
     public MorseToRoman() {
+        morsetoromanMap = new HashMap<>();
         MorseTree tree = new MorseTree();
         Node[] nodes = tree.getNodes();
         Queue<Node> fila = new LinkedList<>();
@@ -31,9 +34,17 @@ public class MorseToRoman {
             }
 
             String revseq = new StringBuilder(seq).reverse().toString();
+            if (fila.peek().getChar() != '_'){
+                morsetoromanMap.put(revseq,fila.peek().getChar());
+            }
             System.out.println("letra: " + fila.peek().getChar() + " | morse: "+ revseq);
             fila.remove(fila.peek());
         }
 
+        System.out.println(morsetoromanMap.entrySet());
+    }
+
+    public HashMap getmtsTree(){
+        return morsetoromanMap;
     }
 }

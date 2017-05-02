@@ -1,12 +1,17 @@
 package br.pro.hashi.ensino.desagil.morse;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.AppCompatTextView;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
@@ -18,13 +23,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ImageButton;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 import android.os.Handler;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private static final int REQUEST_EXAMPLE = 0;
+    private Handler handler;
     private String tempstringmorse;
     private EditText txt;
     private FloatingActionButton morseButton;
@@ -38,12 +47,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private Timer myTimer;
     private TimerTask task;
     private int secondsPassed;
-
+    private MorseToRoman morseToRoman;
+    private TextView morsetxt;
+    private MorseTree morsetree;
+    private Vibrator vibe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        handler = new Handler();
         tempstringmorse = new String();
         listaDeMsgs = new MsgList();
         mensagens = listaDeMsgs.getMessages();
@@ -58,60 +71,83 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         morseButton=(FloatingActionButton) findViewById(R.id.myButton);
         myTimer = new Timer();
         secondsPassed = 0;
+        morsetxt = (TextView) findViewById(R.id.morseView);
+        morsetree = new MorseTree();
+        vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+//      HashMap mtsTree = morseToRoman.getmtsTree();
+//      System.out.print(mtsTree.entrySet());
+
 
         RomanToMorse elisa = new RomanToMorse();
         Log.d("FREDAO", elisa.getResult().entrySet().toString());
 
         task = new TimerTask() {
-            @Override
             public void run() {
                 if (secondsPassed > 0){
                     secondsPassed--;
-                    Log.d("HUE","diminui");
-
-
+//                  Log.d("HUE","diminui");
                 }
                 else if (secondsPassed == 0) {
-                    Log.d("HUE", "FunFou");
                     secondsPassed = -1;
-                    Log.d("HUE",tempstringmorse);
+                    final String traducao = Character.toString(morsetree.translate(tempstringmorse));
+                    Log.d("HUE",Character.toString(morsetree.translate(tempstringmorse)));
+                    MainActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Log.d("String appended",traducao);
+                            if (!Objects.equals(traducao, "_")){
+                                txt.append(traducao);
+                            }
+                            morsetxt.setText("");
+                        }
+                    });
                     tempstringmorse = "";
-
                 }
             }
         };
+
         myTimer.scheduleAtFixedRate(task,1000,1000);
 
 
         morseButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View V){
-                tempstringmorse += ".";
-                secondsPassed = 2;
-                Log.d("HUE", "FunFou");
+                if (tempstringmorse.length() < 5){
+                    tempstringmorse += ".";
+                    morsetxt.setText(tempstringmorse);
+                    secondsPassed = 1;
+                }
             }
         });
-
 
         morseButton.setOnLongClickListener(new View.OnLongClickListener(){
             @Override
             public boolean onLongClick(View V){
-                tempstringmorse += "-";
-                secondsPassed = 2;
+                if (tempstringmorse.length() < 5){
+                    tempstringmorse += "-";
+                    morsetxt.setText(tempstringmorse);
+                    secondsPassed = 1;
+                }
                 return true;
             }
         });
+
         delete.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View V){
-                txt.setText("");
-                tempstringmorse = "";
-                secondsPassed = -1;
-                Log.d("HUE","Zerou");
+                if (txt.length() != 0){
+                    txt.setText(txt.getText().subSequence( 0, txt.getText().length() - 1 ));
+                    txt.setSelection(txt.length());
+                }
             }
         });
-
     }
+
+    public void addSpaceBar(View view){
+        txt.append(" ");
+    }
+
 
     public void sendMessage(View view) {
         SmsManager manager = SmsManager.getDefault();
@@ -177,6 +213,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void nextItem(View view){
+        vibe.vibrate(100);
         if(postosend < 6) {
             postosend += 1;
             dropdown.setSelection(postosend);
@@ -185,6 +222,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void prevItem(View view){
+        vibe.vibrate(100);
         if(postosend > 0) {
             postosend -= 1;
             dropdown.setSelection(postosend);

@@ -88,7 +88,7 @@ public class MorseTree {
 
             for (int i = 0; i < parts.length; i++) {
                 if (parts[i].matches("-")) {
-                    System.out.println("é traço");
+//                    System.out.println("é traço");
                     if (right.getChar() == '_') {
                         try {
                             if (right.getLeft().getChar() != '_' || right.getRight().getChar() != '_') {
@@ -113,7 +113,7 @@ public class MorseTree {
 
                     }
                 } else if (parts[i].matches(".")) {
-                    System.out.println("é ponto");
+//                    System.out.println("é ponto");
                     if (left.getChar() == '_') {
                         try {
                             if (left.getLeft().getChar() != '_' || left.getRight().getChar() != '_') {
@@ -138,7 +138,7 @@ public class MorseTree {
                     }
                 }
             }
-            System.out.println(translation);
+//            System.out.println(translation);
             return translation;
         }
     }
