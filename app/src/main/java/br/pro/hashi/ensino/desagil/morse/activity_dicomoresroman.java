@@ -28,7 +28,6 @@ public class activity_dicomoresroman extends AppCompatActivity {
         Log.i("alo", chaves.toString());
         Log.i("alo", valores.toString());
 
-        grid
 
 
     }

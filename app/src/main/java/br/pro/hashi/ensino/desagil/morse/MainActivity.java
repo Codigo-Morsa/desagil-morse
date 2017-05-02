@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private MorseTree morsetree;
     private Vibrator vibe;
     private Button mtor;
+    private Button rtom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,14 +80,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         morsetree = new MorseTree();
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         mtor = (Button) findViewById(R.id.mtor);
+        rtom = (Button) findViewById(R.id.rtom);
 
 //      HashMap mtsTree = morseToRoman.getmtsTree();
 //      System.out.print(mtsTree.entrySet());
 
-
-
-        RomanToMorse elisa = new RomanToMorse();
-        Log.d("FREDAO", elisa.getResult().entrySet().toString());
+        
 
         task = new TimerTask() {
             public void run() {
@@ -121,6 +120,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 goToMorseToRomanActivity();
             }
         });
+
+        rtom.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick (View V){
+                goToRomanToMorseActivity();
+            }
+        });
+
 
         morseButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -244,6 +251,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private void goToMorseToRomanActivity() {
         Intent intent = new Intent(this, activity_dicomoresroman.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void goToRomanToMorseActivity() {
+        Intent intent = new Intent(this, activity_dicromantomorse.class);
         startActivity(intent);
         finish();
     }
