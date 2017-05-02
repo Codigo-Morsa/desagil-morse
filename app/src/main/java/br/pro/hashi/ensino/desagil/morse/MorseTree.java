@@ -58,17 +58,22 @@ public class MorseTree {
     }
 
     public String codigo(char letter) {
-        parent = current.getParent();
-        String seq = new String();
-        map.get(letter);
+        Node atual = map.get(letter);
+        parent = atual.getParent();
+        String seqinv = new String();
         while (parent != null) {
-            if (current == parent.getLeft()) {
-                return null;
+            if (atual == parent.getLeft()) {
+                seqinv += ".";
 
-            } else if (current == parent.getRight()) {
-                //tra�o
-                return null;
+            } else if (atual == parent.getRight()) {
+                seqinv += "-";
             }
+            atual = atual.getParent();
+            parent = atual.getParent();
+        }
+        String seq = new String();
+        for (int i=seq.length();i>0;i--){
+            seq += seqinv.charAt(i);
         }
         return seq;
     }

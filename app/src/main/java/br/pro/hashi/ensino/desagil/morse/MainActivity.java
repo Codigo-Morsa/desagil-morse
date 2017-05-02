@@ -59,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         myTimer = new Timer();
         secondsPassed = 0;
 
+        RomanToMorse elisa = new RomanToMorse();
+        System.out.println(elisa.getResult());
+
         task = new TimerTask() {
             @Override
             public void run() {
