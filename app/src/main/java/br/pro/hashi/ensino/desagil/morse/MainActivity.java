@@ -15,13 +15,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
-
+import android.widget.ImageButton;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+import android.os.Handler;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private static final int REQUEST_EXAMPLE = 0;
-
+    private String tempstringmorse;
     private EditText txt;
     private FloatingActionButton morseButton;
     private List<String> mensagens;
@@ -29,20 +33,80 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private Spinner dropdown;
     private MsgList listaDeMsgs;
     private String msgtosend;
+    private ImageButton delete;
     private int postosend;
+    private Timer myTimer;
+    private TimerTask task;
+    private int secondsPassed;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        tempstringmorse = new String();
         listaDeMsgs = new MsgList();
         mensagens = listaDeMsgs.getMessages();
+        delete = (ImageButton) findViewById(R.id.deleteButton);
         msgtosend = null;
         postosend = 0;
         listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mensagens);
         dropdown = (Spinner)findViewById(R.id.spinner);
         dropdown.setOnItemSelectedListener(this);
         dropdown.setAdapter(listAdapter);
+        txt = (EditText) findViewById(R.id.editText2);
+        morseButton=(FloatingActionButton) findViewById(R.id.myButton);
+        myTimer = new Timer();
+        secondsPassed = 0;
+
+        task = new TimerTask() {
+            @Override
+            public void run() {
+                if (secondsPassed > 0){
+                    secondsPassed--;
+                    Log.d("HUE","diminui");
+
+
+                }
+                else if (secondsPassed == 0) {
+                    Log.d("HUE", "FunFou");
+                    secondsPassed = -1;
+                    Log.d("HUE",tempstringmorse);
+                    tempstringmorse = "";
+
+                }
+            }
+        };
+        myTimer.scheduleAtFixedRate(task,1000,1000);
+
+
+        morseButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View V){
+                tempstringmorse += ".";
+                secondsPassed = 2;
+                Log.d("HUE", "FunFou");
+            }
+        });
+
+
+        morseButton.setOnLongClickListener(new View.OnLongClickListener(){
+            @Override
+            public boolean onLongClick(View V){
+                tempstringmorse += "-";
+                secondsPassed = 2;
+                return true;
+            }
+        });
+        delete.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View V){
+                txt.setText("");
+                tempstringmorse = "";
+                secondsPassed = -1;
+                Log.d("HUE","Zerou");
+            }
+        });
 
     }
 
@@ -63,25 +127,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
 //        listView = (ListView) findViewById(R.id.msgsListView);
 //        listView.setAdapter(listAdapter);
-        txt = (EditText) findViewById(R.id.editText2);
-        morseButton=(FloatingActionButton) findViewById(R.id.myButton);
-
-
-        morseButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View V){
-                txt.append(".");
-            }
-        });
-
-
-        morseButton.setOnLongClickListener(new View.OnLongClickListener(){
-            @Override
-            public boolean onLongClick(View V){
-                txt.append("-");
-                return true;
-            }
-        });
     }
 
 
@@ -90,7 +135,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if(permission == PackageManager.PERMISSION_GRANTED) {
             Toast toast = Toast.makeText(this, "Enviando SMS!", Toast.LENGTH_SHORT);
             toast.show();
-            /// Aqui vão as chamadas das funções para propriamente enviar as mensagens para um número a ser definido
             sendMessage(view);
         }
         else {
@@ -130,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void nextItem(View view){
-        if(postosend < 5) {
+        if(postosend < 6) {
             postosend += 1;
             dropdown.setSelection(postosend);
         }
