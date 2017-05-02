@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         secondsPassed = 0;
 
         RomanToMorse elisa = new RomanToMorse();
-        System.out.println(elisa.getResult());
+        Log.d("FREDAO", elisa.getResult().entrySet().toString());
 
         task = new TimerTask() {
             @Override
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void sendMessage(View view) {
         SmsManager manager = SmsManager.getDefault();
 
-        String number = "011999331669"; //colocar o numero do cuidador
+        String number = "+5517991953199"; //colocar o numero do cuidador
         String message = msgtosend;
 
         try {
