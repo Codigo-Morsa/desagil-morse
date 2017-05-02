@@ -12,7 +12,7 @@ public class RomanToMorse {
     private HashMap<Character, String> dic;
 
     public RomanToMorse(){
-        letterList = "abcdefghijklmnopqrstuvwxyz123456789+=/";
+        letterList = "abcdefghijklmnopqrstuvwxyz1234567890+=/";
         dic = new HashMap<>();
         for (int i=0; i < letterList.length(); i++) {
             String morse = tree.codigo(letterList.charAt(i));

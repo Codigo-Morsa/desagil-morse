@@ -3,6 +3,7 @@ package br.pro.hashi.ensino.desagil.morse;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -12,11 +13,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.ButtonBarLayout;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -51,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private TextView morsetxt;
     private MorseTree morsetree;
     private Vibrator vibe;
+    private Button mtor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +78,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         morsetxt = (TextView) findViewById(R.id.morseView);
         morsetree = new MorseTree();
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        mtor = (Button) findViewById(R.id.mtor);
 
 //      HashMap mtsTree = morseToRoman.getmtsTree();
 //      System.out.print(mtsTree.entrySet());
+
 
 
         RomanToMorse elisa = new RomanToMorse();
@@ -109,6 +115,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         myTimer.scheduleAtFixedRate(task,1000,1000);
 
+        mtor.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick (View V){
+                goToMorseToRomanActivity();
+            }
+        });
 
         morseButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -229,4 +241,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
 
     }
+
+    private void goToMorseToRomanActivity() {
+        Intent intent = new Intent(this, activity_dicomoresroman.class);
+        startActivity(intent);
+        finish();
+    }
+
 }
