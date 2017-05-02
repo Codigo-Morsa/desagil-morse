@@ -9,18 +9,23 @@ import java.util.HashMap;
 public class RomanToMorse {
     public String letterList;
     private MorseTree tree = new MorseTree();
-    private HashMap<Character, String> dic;
+    private String[] dicRoman;
+    private String[] dicMorse;
 
     public RomanToMorse(){
-        letterList = "abcdefghijklmnopqrstuvwxyz123456789+=/";
-        dic = new HashMap<>();
+        letterList = "abcdefghijklmnopqrstuvwxyz1234567890+=/";
+        dicRoman = new String[letterList.length()];
+        dicMorse = new String[letterList.length()];
+
         for (int i=0; i < letterList.length(); i++) {
             String morse = tree.codigo(letterList.charAt(i));
-            dic.put(letterList.charAt(i), morse);
+            dicRoman[i] = Character.toString(letterList.charAt(i));
+            dicMorse[i] = morse;
+
         }
     }
 
-    public HashMap<Character, String> getResult(){
-        return dic;
+    public String[] getResult(){
+        return dicMorse;
     }
 }
