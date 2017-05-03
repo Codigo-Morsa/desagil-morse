@@ -21,7 +21,7 @@ public class activity_dicromantomorse extends AppCompatActivity {
           //  listaRoman[i]=Character.toString(letterList.charAt(i));
         //}
         //rtm = new RomanToMorse();
-
+        //listaMorse = rtm.getResult();
 
 
     }
