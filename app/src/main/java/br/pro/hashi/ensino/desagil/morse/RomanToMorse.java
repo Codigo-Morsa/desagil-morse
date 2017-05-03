@@ -17,6 +17,7 @@ public class RomanToMorse {
         dicRoman = new String[letterList.length()];
         dicMorse = new String[letterList.length()];
 
+
         for (int i=0; i < letterList.length(); i++) {
             String morse = tree.codigo(letterList.charAt(i));
             dicRoman[i] = Character.toString(letterList.charAt(i));
