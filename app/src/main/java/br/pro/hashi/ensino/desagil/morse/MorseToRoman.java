@@ -25,10 +25,10 @@ public class MorseToRoman {
             while(fila.peek().getParent() != null) {
                 try {
                     if (current.getParent().getLeft() == current) {
-                        seq = seq + ".";
+                        seq = seq + "•";
                         current = current.getParent();
                     } else if(current.getParent().getRight() == current){
-                        seq = seq + "-";
+                        seq = seq + "−";
                         current = current.getParent();
                     }
                 } catch (NullPointerException e){
