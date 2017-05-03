@@ -65,9 +65,9 @@ public class MorseTree {
         String seqinv = "";
         while (parent != null) {
             if (atual == parent.getLeft()) {
-                seqinv += ".";
+                seqinv += "•";
             } else if (atual == parent.getRight()) {
-                seqinv += "-";
+                seqinv += "−";
             }
             atual = atual.getParent();
             parent = atual.getParent();
