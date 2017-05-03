@@ -1,5 +1,7 @@
 package br.pro.hashi.ensino.desagil.morse;
 
+import android.util.Log;
+
 import java.util.HashMap;
 
 public class MorseTree {
@@ -59,21 +61,20 @@ public class MorseTree {
 
     public String codigo(char letter) {
         Node atual = map.get(letter);
-        parent = atual.getParent();
-        String seqinv = new String();
+        Node parent = atual.getParent();
+        String seqinv = "";
         while (parent != null) {
             if (atual == parent.getLeft()) {
                 seqinv += ".";
-
             } else if (atual == parent.getRight()) {
                 seqinv += "-";
             }
             atual = atual.getParent();
             parent = atual.getParent();
         }
-        String seq = new String();
-        for (int i=seq.length();i>0;i--){
-            seq += seqinv.charAt(i);
+        String seq = "";
+        for (int l=seqinv.length()-1;l>=0;l--){
+            seq += seqinv.charAt(l);
         }
         return seq;
     }

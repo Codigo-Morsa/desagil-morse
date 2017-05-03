@@ -264,13 +264,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private void goToMorseToRomanActivity() {
         Intent intent = new Intent(this, activity_dicomoresroman.class);
         startActivity(intent);
-        finish();
+        //finish();
     }
 
     private void goToRomanToMorseActivity() {
         Intent intent = new Intent(this, activity_dicromantomorse.class);
         startActivity(intent);
-        finish();
+        //finish();
     }
 
 }

@@ -37,16 +37,25 @@ public class activity_dicromantomorse extends AppCompatActivity {
         int dobro = letterList.length()*2;
 
         intercalados = new String[dobro];
+        int j=0;
+        int k=0;
+        for (int i=0; i < dobro; i++) {
+            if ((i%2) != 0){
+                intercalados[i] = listaMorse[j];
+                j++;
+            }
+            else{
+                intercalados[i] = Character.toString(letterList.charAt(k));
+                k++;
+            }
 
-        for (int i=0; i < dobro; i=i+2) {
-            intercalados[i] =
         }
 
 
 
-        final List<String> roman = new ArrayList<String>(Arrays.asList(listaRoman));
+        final List<String> dici = new ArrayList<String>(Arrays.asList(intercalados));
         final ArrayAdapter<String> gridViewArrayAdapter = new ArrayAdapter<String>
-                (this,android.R.layout.simple_list_item_1, roman);
+                (this,android.R.layout.simple_list_item_1, dici);
         grid.setAdapter(gridViewArrayAdapter);
 
 
