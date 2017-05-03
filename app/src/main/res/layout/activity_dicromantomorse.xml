@@ -9,4 +9,11 @@
     android:layout_margin="16dp"
     android:id="@+id/grid"
     tools:context="br.pro.hashi.ensino.desagil.morse.activity_dicromantomorse">
+
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="2"
+        android:id="@+id/gridview"/>
+
 </GridLayout>

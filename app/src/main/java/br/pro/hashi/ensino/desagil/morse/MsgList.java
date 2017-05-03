@@ -12,7 +12,7 @@ public class MsgList {
 
     public MsgList(){
         messages = new LinkedList<String>();
-        messages.add(0,"");
+        messages.add(0,"Escolha uma mensagem nas setas");
         messages.add(1, "URGENTE! Preciso de você!");
         messages.add(2, "Preciso de você.");
         messages.add(3, "Preciso de água.");

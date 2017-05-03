@@ -59,20 +59,20 @@ public class MorseTree {
 
     public String codigo(char letter) {
         Node atual = map.get(letter);
-        parent = atual.getParent();
-        String seqinv = new String();
+        Node parent = atual.getParent();
+        String seqinv = "";
         while (parent != null) {
             if (atual == parent.getLeft()) {
-                seqinv += ".";
+                seqinv += "•";
 
             } else if (atual == parent.getRight()) {
-                seqinv += "-";
+                seqinv += "−";
             }
             atual = atual.getParent();
             parent = atual.getParent();
         }
-        String seq = new String();
-        for (int i=seq.length();i>0;i--){
+        String seq = "";
+        for (int i=seqinv.length() - 1; i>=0; i--){
             seq += seqinv.charAt(i);
         }
         return seq;
@@ -87,7 +87,7 @@ public class MorseTree {
             char translation = ' ';
 
             for (int i = 0; i < parts.length; i++) {
-                if (parts[i].matches("-")) {
+                if (parts[i].matches("-") || parts[i].matches("−")) {
 //                    System.out.println("é traço");
                     if (right.getChar() == '_') {
                         try {
@@ -112,7 +112,7 @@ public class MorseTree {
                         translation = current.getChar();
 
                     }
-                } else if (parts[i].matches(".")) {
+                } else if (parts[i].matches(".") || parts[i].matches("•")) {
 //                    System.out.println("é ponto");
                     if (left.getChar() == '_') {
                         try {

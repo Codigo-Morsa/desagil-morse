@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         handler = new Handler();
-        tempstringmorse = new String();
+        tempstringmorse = "";
         listaDeMsgs = new MsgList();
         mensagens = listaDeMsgs.getMessages();
         delete = (ImageButton) findViewById(R.id.deleteButton);
@@ -93,16 +93,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             public void run() {
                 if (secondsPassed > 0){
                     secondsPassed--;
-//                  Log.d("HUE","diminui");
                 }
                 else if (secondsPassed == 0) {
                     secondsPassed = -1;
                     final String traducao = Character.toString(morsetree.translate(tempstringmorse));
-                    Log.d("HUE",Character.toString(morsetree.translate(tempstringmorse)));
                     MainActivity.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Log.d("String appended",traducao);
+                            if (Objects.equals(txt.getText().toString(), " ")){
+                                txt.setText("");
+                            }
                             if (!Objects.equals(traducao, "_")){
                                 txt.append(traducao);
 
@@ -112,6 +112,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     });
                     tempstringmorse = "";
                 }
+
+                MainActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (Objects.equals(txt.getText().toString(), " ")){
+                            txt.setText("");
+                        }
+                    }
+                });
+
             }
         };
 
@@ -136,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View V){
                 if (tempstringmorse.length() < 5){
-                    tempstringmorse += ".";
+                    tempstringmorse += "•";
                     morsetxt.setText(tempstringmorse);
                     secondsPassed = 1;
                 }
@@ -147,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public boolean onLongClick(View V){
                 if (tempstringmorse.length() < 5) {
-                    tempstringmorse += "-";
+                    tempstringmorse += "−";
                     morsetxt.setText(tempstringmorse);
                     secondsPassed = 1;
                 }
@@ -185,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             toast.show();
         }
         catch(IllegalArgumentException exception){
-            Log.e("SendActivity", "numbe+r or message empty");
+            Log.e("SendActivity", "number or message empty");
         }
 //        listView = (ListView) findViewById(R.id.msgsListView);
 //        listView.setAdapter(listAdapter);
@@ -201,9 +211,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 msgtosend = txt.getText().toString();
             }
 
-            Toast toast = Toast.makeText(this, "Enviando SMS!", Toast.LENGTH_SHORT);
-            toast.show();
-            sendMessage(view);
+            if(postosend>0 || txt.length() != 0) {
+                Toast toast = Toast.makeText(this, "Enviando SMS!", Toast.LENGTH_SHORT);
+                toast.show();
+                sendMessage(view);
+                txt.setText("");
+                dropdown.setSelection(0);
+                postosend = 0;
+                msgtosend = "";
+            }
         }
         else {
             String[] permissions = new String[1];
@@ -264,13 +280,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private void goToMorseToRomanActivity() {
         Intent intent = new Intent(this, activity_dicomoresroman.class);
         startActivity(intent);
-        finish();
     }
 
     private void goToRomanToMorseActivity() {
         Intent intent = new Intent(this, activity_dicromantomorse.class);
         startActivity(intent);
-        finish();
+
     }
 
 }
